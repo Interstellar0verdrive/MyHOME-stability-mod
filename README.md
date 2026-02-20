@@ -1,5 +1,3 @@
----
-
 ## ⚠️ Work in Progress – Personal Fork
 
 This repository is a fork of  
@@ -11,8 +9,6 @@ It is not stable, not reviewed, and not intended for production use.
 
 Original project:
 https://github.com/anotherjulien/MyHOME
-
----
 
 # What's up?
 
