@@ -136,7 +136,7 @@ class MyHOMEGatewayHandler:
         self._terminate_listener = False
 
         LOGGER.debug("%s Creating listening worker.", self.log_id)
-
+        LOGGER.info("%s Listening loop started.", self.log_id)
         backoff = 1
         max_backoff = 60
         _event_session = None
@@ -152,7 +152,12 @@ class MyHOMEGatewayHandler:
 
                 # Avoid an infinite await when the gateway resets / half-opens the socket.
                 # We wake up periodically to check termination flags and to allow reconnect logic.
-                message = await asyncio.wait_for(_event_session.get_next(), timeout=30)
+                try:
+                    message = await asyncio.wait_for(_event_session.get_next(), timeout=30)
+                except asyncio.TimeoutError:
+                    LOGGER.debug("%s Listening loop timeout waiting for events (30s).", self.log_id)
+                    continue
+
                 LOGGER.debug("%s Message received: `%s`", self.log_id, message)
 
                 if self.generate_events:
