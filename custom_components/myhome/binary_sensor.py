@@ -39,7 +39,13 @@ from .const import (
 from .myhome_device import MyHOMEEntity
 from .gateway import MyHOMEGatewayHandler
 
-SCAN_INTERVAL = timedelta(seconds=5)
+#
+# Home Assistant polling interval for binary sensors that have _attr_should_poll = True.
+# 5 seconds is extremely aggressive and can generate unnecessary traffic toward the gateway.
+# Since motion timeout logic is handled internally and most state updates are event-driven,
+# a calmer interval is sufficient.
+SCAN_INTERVAL = timedelta(seconds=30)  # 30 seconds - originally 5s, but some gateways disconnect if polled too frequently
+
 PIR_SENSITIVITY = ["low", "medium", "high", "very high"]
 
 

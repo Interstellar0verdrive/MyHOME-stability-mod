@@ -56,7 +56,10 @@ from .const import (
 from .gateway import MyHOMEGatewayHandler
 from .myhome_device import MyHOMEEntity
 
-SCAN_INTERVAL = timedelta(seconds=60)
+# Home Assistant calls async_update() for polling entities (those with _attr_should_poll = True)
+# at this interval. 60s is quite aggressive and can keep the gateway command session under
+# constant churn (and trigger frequent reconnects on some gateways). Use a calmer interval.
+SCAN_INTERVAL = timedelta(seconds=300)  # 5 minutes - originally 60s, but some gateways disconnect if polled too frequently
 
 SERVICE_SEND_INSTANT_POWER = "start_sending_instant_power"
 
