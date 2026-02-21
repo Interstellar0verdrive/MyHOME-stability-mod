@@ -1,4 +1,4 @@
-## ⚠️ Personal Fork – Experimental Stability Improvements
+## ⚠️ # MyHOME – Stability Mod (Unofficial Fork)
 
 This repository is a personal fork of:
 **anotherjulien/MyHOME**
